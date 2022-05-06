@@ -170,47 +170,6 @@ void setup() {
     val[0] = 0x01;    
     BLECharacteristic* pcData3 = newChar(psData, "85da4f4b-a2ca-4c7c-8c7d-fcd9e2daad56", CHAR_READ | CHAR_NOTIFY, val, 1);
  
-/*
-
-    BLEService* psE = pServer->createService(BLEUUID("FE59"), 20);
-    BLECharacteristic* pcE1 = newCharNoVal(psE, "8ec90003-f315-4f60-9fb8-838830daea50", CHAR_WRITE | CHAR_INDICATE);
-
-
-
-    BLEService* psF = pServer->createService(BLEUUID("25a22330-820f-11e3-baa7-0800200c9a66"), 20);
-    uint8_t datF1[12] = {0x32, 0x2c, 0x73, 0x31, 0x33, 0x32, 0x5f, 0x37, 0x2e, 0x32, 0x2e, 0x30};
-    BLECharacteristic* pcF1 = newChar(psF, "ba7cc552-cc2c-404e-bf75-8778f023787d", CHAR_READ, datF1, 12);
-
-    BLEService* psG = pServer->createService(BLEUUID("03b80e5a-ede8-4b33-a751-6ce34ec4c700"), 20);
-    BLECharacteristic* pcG1 = newCharNoVal(psG, "7772e5db-3868-4112-a1a9-f2669d106bf3", CHAR_READ | CHAR_WRITE | CHAR_NOTIFY);
-
-// H Service
-
-    BLEService* psH = pServer->createService(BLEUUID("97a16290-8c08-11e3-baa8-0800200c9a66"), 60);
-
-    val[0] = 0x00;    
-    BLECharacteristic* pcH1 = newChar(     psH, "640c0d80-9b4f-11e3-a5e2-0800200c9a66", CHAR_READ | CHAR_WRITE, val, 1);
-    val[0] = 0x00;    
-    BLECharacteristic* pcH2 = newChar(     psH, "49aa8950-a40d-11e3-a5e2-0800200c9a66", CHAR_READ | CHAR_WRITE, val, 1);
-    BLECharacteristic* pcH3 = newCharNoVal(psH, "3673862E-780A-4936-9C56-5477A6C62B94", CHAR_READ);
-    uint8_t datH4[19] = {0x05, 0x03, 0x00, 0x00, 0x00, 0x28, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}; 
-    BLECharacteristic* pcH4 = newChar(     psH, "fbeeeb29-c82a-4fb6-a5f7-aee512c93790", CHAR_READ | CHAR_WRITE, datH4, 19);
-    val[0] = 0x28;
-    BLECharacteristic* pcH5 = newChar(     psH, "75cbbe2f-09ec-4b34-86c4-6124c4dd68f4", CHAR_READ, val, 1);
-    BLECharacteristic* pcH6 = newCharNoVal(psH, "1bcf02e0-d53e-468c-9d6d-e9251230d8c9", CHAR_READ | CHAR_WRITE);
-    uint8_t datH7[2] = {0x20, 0x1c}; 
-    BLECharacteristic* pcH7 = newChar(     psH, "7b51af7d-f28a-48be-8081-6a647e6249eb", CHAR_READ, datH7, 2);
-    val[0] = 0x01; 
-    BLECharacteristic* pcH8 = newChar(     psH, "db3207d4-97ff-4497-ad1d-0ba1bccc56ba", CHAR_READ | CHAR_WRITE, val, 1);
-    val[0] = 0x01;
-    BLECharacteristic* pcH9 = newChar(     psH, "b8980e72-799c-4172-af97-46380afb068c", CHAR_READ | CHAR_WRITE, val, 1);
-    uint8_t datHA[2] = {0x32, 0x00}; 
-    BLECharacteristic* pcHA = newChar(     psH, "13252451-fc8e-46e7-8dce-c799276bd61c", CHAR_READ | CHAR_WRITE, datHA, 2);
-    BLECharacteristic* pcHB = newCharNoVal(psH, "29eaf09d-996d-4d94-a989-ed320fbac5c9", CHAR_WRITE);
-    BLECharacteristic* pcHC = newCharNoVal(psH, "733ee9cc-174d-452E-b45c-0402aa75ff75", CHAR_READ | CHAR_WRITE);
-
-*/
-
 
     psDevInf->start();
     psBat->start();
@@ -218,10 +177,6 @@ void setup() {
     psB->start();
     psC->start();    
     psData->start(); 
-//    psE->start(); 
-//    psF->start();
-//    psG->start();
-//    psH->start();
     
     BLEAdvertising* pAdvertising = BLEDevice::getAdvertising();
 
