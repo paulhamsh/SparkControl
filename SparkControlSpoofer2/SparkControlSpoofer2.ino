@@ -1,6 +1,9 @@
-#include "heltec.h"
-
+#define HELTEC
 #define CLASSIC
+
+#ifdef HELTEC
+#include "heltec.h"
+#endif
 
 #ifdef CLASSIC
   #include <BLEDevice.h>
@@ -127,15 +130,21 @@ uint8_t now_switch;
 
 void setup() {
 // general setup
-
+#ifdef HELTEC
   Heltec.begin(true /*DisplayEnable Enable*/, false /*LoRa Enable*/, true /*Serial Enable*/);
 
   Heltec.display->setFont(ArialMT_Plain_24); // 10, 16 and 24
   Heltec.display->clear();
   Heltec.display->drawString(0, 0, "Spk Control");
+  #ifdef CLASSIC
+  Heltec.display->drawString(0, 30, "CLASSIC");
+  #else
+  Heltec.display->drawString(0, 30, "NimBLE");
+  #endif
   Heltec.display->display();
-
-
+#else
+  Serial.begin(115200);
+#endif
   
   Serial.println("Starting BLE Server");
 
@@ -271,9 +280,9 @@ void setup() {
   #endif
 
     BLEAdvertising* pAdvertising = BLEDevice::getAdvertising();
-
     pAdvertising->addServiceUUID(psData->getUUID());
 
+#ifdef CLASSIC
     BLEAdvertisementData oAdvertisementData  = BLEAdvertisementData();
     oAdvertisementData.setName("SKC50S-4 v3.0.1 9E02");
     uint8_t adv_data[] = {0x22, 0x01, 0x01, 0x1b};
@@ -281,7 +290,15 @@ void setup() {
     oAdvertisementData.setAppearance(960);    
     pAdvertising->setAdvertisementData(oAdvertisementData);
     //pAdvertising->setScanResponseData(oAdvertisementData);
-    
+#else
+    pAdvertising->setName("SKC50S-4 v3.0.1 9E02");
+    uint8_t adv_data[] = {0x22, 0x01, 0x01, 0x1b};
+    pAdvertising->setManufacturerData(std::string((char *)adv_data, 4)); 
+//    pAdvertising->setAppearance(960);   
+
+    pAdvertising->setMinPreferred(0x06);
+    pAdvertising->setMaxPreferred(0x12);
+#endif
     pAdvertising->setScanResponse(true);
     pAdvertising->start();
 
@@ -312,7 +329,8 @@ void loop() {
       pcData1->setValue(dat, 1);
       pcData1->notify();
       last_switch = now_switch;
-      Serial.print("Switched");
+      Serial.print("Switched ");
+      Serial.println(now_switch);
       delay(200);
     }                  
   }
