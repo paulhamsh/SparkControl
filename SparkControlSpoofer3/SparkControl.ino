@@ -17,6 +17,7 @@
   #define CHAR_INDICATE  NIMBLE_PROPERTY::INDICATE
 #endif
 
+// Had to put these her to make the compiler work but not really sure why
 
 BLEService* newService(BLEServer *server, const char *service_UUID, int num_chars);
 BLECharacteristic* newCharNoVal(BLEService *pService, const char *char_UUID, uint8_t properties);
