@@ -1,4 +1,4 @@
-#include "SparkControlSpoofer.h"
+/////////////////////////////////////////
 
 #ifdef CLASSIC
   #include <BLEDevice.h>
@@ -10,7 +10,7 @@
   #define CHAR_NOTIFY    BLECharacteristic::PROPERTY_NOTIFY
   #define CHAR_INDICATE  BLECharacteristic::PROPERTY_INDICATE
 #else
-  #include <NimBLEDevice.h>
+  #include <NimBLEDevice.h>  
   #define CHAR_READ      NIMBLE_PROPERTY::READ 
   #define CHAR_WRITE     NIMBLE_PROPERTY::WRITE
   #define CHAR_NOTIFY    NIMBLE_PROPERTY::NOTIFY
@@ -18,7 +18,12 @@
 #endif
 
 
-//////// Server callbacks
+BLEService* newService(BLEServer *server, const char *service_UUID, int num_chars);
+BLECharacteristic* newCharNoVal(BLEService *pService, const char *char_UUID, uint8_t properties);
+BLECharacteristic* newChar(BLEService *pService, const char *char_UUID, uint8_t properties, uint8_t *data, int data_len);
+
+
+// Server callbacks
 class SCServerCallbacks: public BLEServerCallbacks {
   void onConnect(BLEServer* pServer) {
     Serial.println("Client connected");
@@ -30,7 +35,7 @@ class SCServerCallbacks: public BLEServerCallbacks {
   };
 };
 
-//////// Characteristic callbacks
+// Characteristic callbacks
 class SCCharacteristicCallbacks: public BLECharacteristicCallbacks {
   void onRead(BLECharacteristic* pCharacteristic){
     Serial.print("<<<< ");
@@ -100,6 +105,7 @@ BLECharacteristic* newChar(BLEService *pService, const char *char_UUID, uint8_t 
   pChar->setValue(data, data_len); 
   return pChar;
 }
+
 
 void SparkControlStart() {
     uint8_t dat[1];
@@ -250,8 +256,8 @@ void SparkControlStart() {
 
 
 
-uint8_t switchPins[]{33,14,27,26};  // PH EDIT
-uint8_t SCswitchPins[]{33,27,14,26}; // Why is it so weird!!!
+uint8_t switchPins[]{33,14,27,26}; 
+uint8_t SCswitchPins[]{33,27,14,26}; 
 uint8_t last_switch = 0;
 uint8_t now_switch = 0;
 uint8_t sw_dat[1];
@@ -282,3 +288,5 @@ void SparkControlLoop() {
       delay(200);
     }     
 }    
+
+/////////////////////////////////////////
