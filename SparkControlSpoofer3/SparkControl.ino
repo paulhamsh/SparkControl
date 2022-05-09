@@ -171,7 +171,7 @@ void SparkControlStart() {
     val[0] = 0x01;    
     BLECharacteristic* pcData3 = newChar(psData, "85da4f4b-a2ca-4c7c-8c7d-fcd9e2daad56", CHAR_READ | CHAR_NOTIFY, val, 1);
 
-#ifndef CLASSIC        
+#ifdef FULL_SERVICES   
     // E Service
     BLEService* psE = newService(pSCServer, "FE59", 20);
     BLECharacteristic* pcE1 = newCharNoVal(psE, "8ec90003-f315-4f60-9fb8-838830daea50", CHAR_WRITE | CHAR_INDICATE);
@@ -215,7 +215,7 @@ void SparkControlStart() {
     psB->start();
     psC->start();    
     psData->start();
-  #ifndef CLASSIC 
+  #ifdef FULL_SERVICES
     psE->start(); 
     psF->start();
     psG->start();
@@ -223,7 +223,6 @@ void SparkControlStart() {
   #endif
 
     BLEAdvertising* pAdvertising = BLEDevice::getAdvertising();
-    pAdvertising->addServiceUUID(psData->getUUID());
 
 #ifdef CLASSIC
     BLEAdvertisementData oAdvertisementData  = BLEAdvertisementData();
@@ -231,16 +230,18 @@ void SparkControlStart() {
     uint8_t adv_data[] = {0x22, 0x01, 0x01, 0x1b};
     oAdvertisementData.setManufacturerData(std::string((char *)adv_data, 4)); 
     oAdvertisementData.setAppearance(960);    
+    //oAdvertisementData.setServiceUUID(psData->getUUID());
     pAdvertising->setAdvertisementData(oAdvertisementData);
     //pAdvertising->setScanResponseData(oAdvertisementData);
 #else
+
     pAdvertising->setName("SKC50S-4 v3.0.1 9E02");
     uint8_t adv_data[] = {0x22, 0x01, 0x01, 0x1b};
     pAdvertising->setManufacturerData(std::string((char *)adv_data, 4)); 
-//    pAdvertising->setAppearance(960);   
-
+    pAdvertising->addServiceUUID(psData->getUUID());
     pAdvertising->setMinPreferred(0x06);
     pAdvertising->setMaxPreferred(0x12);
+    pAdvertising->setAppearance(960);
 #endif
     pAdvertising->setScanResponse(true);
     pAdvertising->start();
@@ -279,6 +280,12 @@ void SparkControlLoop() {
       int v = digitalRead(SCswitchPins[i]) == logicON ? 1 : 0;
       now_switch |= (v << i);
     }
+    #if defined M5CORE2 || defined M5CORE
+      M5.update();
+      if (M5.BtnA.isPressed()) now_switch = 1;
+      if (M5.BtnB.isPressed()) now_switch = 4;
+      if (M5.BtnC.isPressed()) now_switch = 2;            
+    #endif
     if (now_switch != last_switch) {
       sw_dat[0] = now_switch;
       pcData1->setValue(sw_dat, 1);
