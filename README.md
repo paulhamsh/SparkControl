@@ -14,3 +14,11 @@ And there is also something strange that requires LightBlue to scan the services
 So, we need to compile bluedroid to set the advertising name, then with NimBLE to allow all services, then scan with LightBlue, then connect from the app.   
 
 Hmmm.....    
+
+I've raised two issues for this:     
+
+https://github.com/h2zero/NimBLE-Arduino/issues/400    
+
+
+https://github.com/espressif/arduino-esp32/issues/6692
+
