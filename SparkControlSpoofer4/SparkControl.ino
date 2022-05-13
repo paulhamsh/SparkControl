@@ -121,12 +121,12 @@ void SparkControlStart() {
     Serial.println("Spark Control emulation");
     static BLEServer* pSCServer;
         
-    BLEDevice::init("SKC50S-4 v3.0.1 9E02");
+    BLEDevice::init("SKC50S-4 v3.0.1 9E0"); // "2"
     BLEDevice::setPower(ESP_PWR_LVL_P9); /** +9db */
     pSCServer = BLEDevice::createServer();
     pSCServer->setCallbacks(new SCServerCallbacks());
     // Device Information
-    BLEService* psDevInf = newService(pSCServer, "180a", 40);        
+    BLEService* psDevInf = newService(pSCServer, "180a", 20);        
     uint8_t manuf[7]={'A', 'i', 'r', 'T', 'u', 'r', 'n'};
     BLECharacteristic* pcManufName = newChar(   psDevInf, "2a29", CHAR_READ, manuf, 7); 
     uint8_t model[8]={'B','T','5','0','0','S','-','4'};
@@ -143,12 +143,12 @@ void SparkControlStart() {
     BLECharacteristic* pcPnPID = newChar(       psDevInf, "2a50", CHAR_READ, pnpid, 7);
 
     // Battery Service
-    BLEService* psBat = newService(pSCServer, "180f", 40);
+    BLEService* psBat = newService(pSCServer, "180f", 10);
     val[0] = 80;    
     BLECharacteristic* pcBatLvl = newChar(psBat, "2a19", CHAR_READ | CHAR_NOTIFY, val, 1);
 
     // Service A
-    BLEService* psA = newService(pSCServer, "34452F38-9E44-46AB-B171-0CC578FEB928", 60);
+    BLEService* psA = newService(pSCServer, "34452F38-9E44-46AB-B171-0CC578FEB928", 20);
     uint8_t A1[14] = {0x04, 0x00, 0x3F, 0x00, 0x3F, 0x00, 0x3F, 0x00, 0x3F, 0x00, 0x3F, 0x00, 0x83, 0x00};    
     BLECharacteristic* pcA1 = newChar(psA, "CAD0C949-7DCE-4A04-9D80-E767C796B392", CHAR_READ, A1, 14);
     val[0] = 0x0F;
@@ -161,18 +161,18 @@ void SparkControlStart() {
     BLECharacteristic* pcA5 = newChar(psA, "54eea35f-27f1-46e4-a790-34becd28b701", CHAR_READ | CHAR_NOTIFY, val, 1);
 
     // B Service
-    BLEService* psB = newService(pSCServer, "6FACFE71-A4C3-4E80-BA5C-533928830727", 20);
+    BLEService* psB = newService(pSCServer, "6FACFE71-A4C3-4E80-BA5C-533928830727", 10);
     val[0] = 0x00;
     BLECharacteristic* pcB1 = newChar(psB, "90D9A098-9CD8-4A7A-B176-91FFE80909F2", CHAR_READ | CHAR_NOTIFY, val, 1);
 
     // C Service
-    BLEService* psC = newService(pSCServer, "5cb68410-6774-11e4-9803-0800200c9a66", 20);
+    BLEService* psC = newService(pSCServer, "5cb68410-6774-11e4-9803-0800200c9a66", 10);
     BLECharacteristic* pcC1 = newCharNoVal(psC, "407eda40-6774-11e4-9803-0800200c9a66", CHAR_WRITE);
 
     // Data Service
-    BLEService* psData = newService(pSCServer, "7bdb8dc0-6c95-11e3-981f-0800200c9a66", 40);
+    BLEService* psData = newService(pSCServer, "7bdb8dc0-6c95-11e3-981f-0800200c9a66", 10);
     val[0] = 0x00;
-    pcData1 =                    newChar(psData, "362f71a0-6c96-11e3-981f-0800200c9a66", CHAR_READ | CHAR_NOTIFY, val, 1);
+    pcData1 = newChar(psData, "362f71a0-6c96-11e3-981f-0800200c9a66", CHAR_READ | CHAR_NOTIFY, val, 1);
     uint8_t datData2[16] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
     BLECharacteristic* pcData2 = newChar(psData, "BD066DA4-F9EC-4F0D-A53C-1CD99147A641", CHAR_READ | CHAR_NOTIFY, datData2, 16);
     val[0] = 0x01;    
@@ -180,20 +180,20 @@ void SparkControlStart() {
 
 #ifdef FULL_SERVICES   
     // E Service
-    BLEService* psE = newService(pSCServer, "FE59", 20);
+    BLEService* psE = newService(pSCServer, "FE59", 10);
     BLECharacteristic* pcE1 = newCharNoVal(psE, "8ec90003-f315-4f60-9fb8-838830daea50", CHAR_WRITE | CHAR_INDICATE);
-
+  
     // F Service        
-    BLEService* psF = newService(pSCServer, "25a22330-820f-11e3-baa7-0800200c9a66", 20);
+    BLEService* psF = newService(pSCServer, "25a22330-820f-11e3-baa7-0800200c9a66", 10);
     uint8_t datF1[12] = {0x32, 0x2c, 0x73, 0x31, 0x33, 0x32, 0x5f, 0x37, 0x2e, 0x32, 0x2e, 0x30};
     BLECharacteristic* pcF1 = newChar(psF, "ba7cc552-cc2c-404e-bf75-8778f023787d", CHAR_READ, datF1, 12);
         
     // G Service            
-    BLEService* psG = newService(pSCServer, "03b80e5a-ede8-4b33-a751-6ce34ec4c700", 20);
+    BLEService* psG = newService(pSCServer, "03b80e5a-ede8-4b33-a751-6ce34ec4c700", 10);
     BLECharacteristic* pcG1 = newCharNoVal(psG, "7772e5db-3868-4112-a1a9-f2669d106bf3", CHAR_READ | CHAR_WRITE | CHAR_NOTIFY);
 
     // H Service
-    BLEService* psH = newService(pSCServer, "97a16290-8c08-11e3-baa8-0800200c9a66", 60);
+    BLEService* psH = newService(pSCServer, "97a16290-8c08-11e3-baa8-0800200c9a66", 40);
     val[0] = 0x00;    
     BLECharacteristic* pcH1 = newChar(     psH, "640c0d80-9b4f-11e3-a5e2-0800200c9a66", CHAR_READ | CHAR_WRITE, val, 1);
     val[0] = 0x00;    
@@ -279,9 +279,7 @@ void SparkControlStart() {
   uint8_t logicOFF = HIGH;
 #endif
 
-
-
-uint8_t switchPins[]{33,14,27,26}; 
+// pins                 1  3  2  4
 uint8_t SCswitchPins[]{33,27,14,26}; 
 uint8_t last_switch = 0;
 uint8_t now_switch = 0;
@@ -290,14 +288,15 @@ uint8_t sw_dat[1];
 void InitialiseGPIO() {
   for (int i = 0; i < 4; i++) {    
   #ifdef ACTIVE_HIGH
-    pinMode(switchPins[i], INPUT_PULLDOWN);
+    pinMode(SCswitchPins[i], INPUT_PULLDOWN);
   #else
-    pinMode(switchPins[i], INPUT_PULLUP);
+    pinMode(SCswitchPins[i], INPUT_PULLUP);
   #endif
   }
 }
 
 void SparkControlLoop() {
+
     now_switch = 0;  
     for (int i = 0; i < 4; i++) {
       int v = digitalRead(SCswitchPins[i]) == logicON ? 1 : 0;
@@ -317,7 +316,7 @@ void SparkControlLoop() {
       Serial.print("Switched ");
       Serial.println(now_switch);
       delay(200);
-    }     
+    }
 }    
 
 /////////////////////////////////////////

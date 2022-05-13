@@ -12,10 +12,9 @@
 //#define HELTEC
 //#define M5CORE
 #define M5CORE2
-#define BLUEDROID
 
+//#define BLUEDROID
 #define FULL_SERVICES
-
 
 #ifdef HELTEC
 #include "heltec.h"
