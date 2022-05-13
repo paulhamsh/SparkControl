@@ -38,7 +38,7 @@ It should find the ESP32 and see it as the Spark Control.
 
 
 <p align="center">
-  <img src="https://github.com/paulhamsh/SparkMIDI/blob/main/pics/BLE connections 3.jpg" width="700" title="connections">
+  <img src="https://github.com/paulhamsh/SparkControl/blob/main/SparkBoxSparkControl.jpg" width="700" title="connections">
 </p>
 
 
