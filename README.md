@@ -1,6 +1,8 @@
 # SparkControl
 ## Emulate the Spark Control pedal   
 
+Use the latest version - SparkControlSpoofer4
+
 Runs on an ESP32 - tested on Heltec WIFI, M5Core, M5Core 2, generic ESP32   
 
 Will appear to the Spark app as the Spark Control pedal.  You can use an existing ESP32 pedal (like Spark Box) or create your own, or use something like an M5Core which has switches on the case (not foot pedal worthy, but good for a demonstration).    
@@ -23,12 +25,12 @@ uint8_t SCswitchPins[]{33,27,14,26};
 For IOS - compile without #BLUEDROID. This forces NimBLE.    
 For Android - compile either way, both work.    
 
-##If using NimBLE:    
+## If using NimBLE:    
 Install LightBlue from PunchThrough. It is a Bluetooth scanning app. Scan for SKC50S-4 v3.0.1 and open the connection (the > sign on the right). Keep LightBlue open.    
 Now open the Spark app. connect to the Spark and then select the + Spark Control button.    
 It should find the ESP32 and see it as the Spark Control.    
 
-##If using BLUEDROID:    
+## If using BLUEDROID:    
 This won't work with IOS.    
 This is more simple - just open the Spark app, connect to the Spark and then select the + Spark Control button.    
 It should find the ESP32 and see it as the Spark Control.     
