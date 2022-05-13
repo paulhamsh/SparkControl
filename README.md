@@ -66,3 +66,14 @@ https://github.com/h2zero/NimBLE-Arduino/issues/400
 
 https://github.com/espressif/arduino-esp32/issues/6692
 
+The limit of 8 is set here:
+
+esp-idf-master\components\bt\host\bluedroid\common\include\common\bluedroid_user_config.h
+
+```
+#ifdef CONFIG_BT_GATT_MAX_SR_PROFILES
+#define UC_CONFIG_BT_GATT_MAX_SR_PROFILES       CONFIG_BT_GATT_MAX_SR_PROFILES
+#else
+#define UC_CONFIG_BT_GATT_MAX_SR_PROFILES       8
+#endif
+```
