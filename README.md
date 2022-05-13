@@ -9,7 +9,7 @@ Example build is running on a Spark Box - see picture below.
 
 Will appear to the Spark app as the Spark Control pedal.  You can use an existing ESP32 pedal (like Spark Box) or create your own, or use something like an M5Core which has switches on the case (not foot pedal worthy, but good for a demonstration).    
 
-Works with ios an android - although you need some compilation changes and tricks.   
+Works with ios and android - although you need some compilation changes and tricks.   
 
 This can be run in 'BLUEDROID' mode or 'NimBLE' mode.   
 
