@@ -3,7 +3,9 @@
 
 Use the latest version - SparkControlSpoofer4
 
-Runs on an ESP32 - tested on Heltec WIFI, M5Core, M5Core 2, generic ESP32   
+Runs on an ESP32 - tested on Heltec WIFI, M5Core, M5Core 2, generic ESP32.   
+
+Example build is running on a Spark Box - see picture below.   
 
 Will appear to the Spark app as the Spark Control pedal.  You can use an existing ESP32 pedal (like Spark Box) or create your own, or use something like an M5Core which has switches on the case (not foot pedal worthy, but good for a demonstration).    
 
