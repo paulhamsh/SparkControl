@@ -9,7 +9,7 @@ Will appear to the Spark app as the Spark Control pedal.  You can use an existin
 
 Works with ios an android - although you need some compilation changes and tricks.   
 
-This can be run in 'bluedroid' mode or 'NimBLE' mode.   
+This can be run in 'BLUEDROID' mode or 'NimBLE' mode.   
 
 There are #defines for Heltec, M5Core, M5Core2 - if nothing is defined it will compile for a generic ESP32.
 
