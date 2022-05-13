@@ -20,18 +20,18 @@ And in the SparkControl.ino file you can change which GPIOs are your switches.  
 uint8_t SCswitchPins[]{33,27,14,26}; 
 ```
 
-For IOS - compile without #BLUEDROID. This forces NimBLE.
-For Android - compile either way, both work.
+For IOS - compile without #BLUEDROID. This forces NimBLE.    
+For Android - compile either way, both work.    
 
-##If using NimBLE:
-Install LightBlue from PunchThrough. It is a Bluetooth scanning app. Scan for SKC50S-4 v3.0.1 and open the connection (the > sign on the right). Keep LightBlue open.
-Now open the Spark app. connect to the Spark and then select the + Spark Control button.
-It should find the ESP32 and see it as the Spark Control.
+##If using NimBLE:    
+Install LightBlue from PunchThrough. It is a Bluetooth scanning app. Scan for SKC50S-4 v3.0.1 and open the connection (the > sign on the right). Keep LightBlue open.    
+Now open the Spark app. connect to the Spark and then select the + Spark Control button.    
+It should find the ESP32 and see it as the Spark Control.    
 
-##If using BLUEDROID:
-This won't work with IOS.
-This is more simple - just open the Spark app, connect to the Spark and then select the + Spark Control button. 
-It should find the ESP32 and see it as the Spark Control.
+##If using BLUEDROID:    
+This won't work with IOS.    
+This is more simple - just open the Spark app, connect to the Spark and then select the + Spark Control button.    
+It should find the ESP32 and see it as the Spark Control.     
 
 -------------------------------------------
 
