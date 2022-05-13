@@ -35,6 +35,13 @@ This won't work with IOS.
 This is more simple - just open the Spark app, connect to the Spark and then select the + Spark Control button.    
 It should find the ESP32 and see it as the Spark Control.     
 
+
+
+<p align="center">
+  <img src="https://github.com/paulhamsh/SparkMIDI/blob/main/pics/BLE connections 3.jpg" width="700" title="connections">
+</p>
+
+
 -------------------------------------------
 
 Bluedroid only works with 7 services, so needs to have #define FULL_SERVICES commented out, and #define CLASSIC set  
