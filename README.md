@@ -51,8 +51,9 @@ It should find the ESP32 and see it as the Spark Control.
 
 
 -------------------------------------------
+## Comments on the limitations in NimBLE and Bluedroid with device name and number of services   
 
-Bluedroid only works with 7 services, so needs to have #define FULL_SERVICES commented out, and #define CLASSIC set  
+Bluedroid only works with 7 services, so needs to have ```#define FULL_SERVICES``` commented out, and ```#define BLUEDROID``` set  
 This will set the advertised device name to something the Spark app recognises, and advertises enough services for Android to connect.   
 
 Sadly, ios required more services to be advertised, which bluedroid seems to not allow.   
