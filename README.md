@@ -36,7 +36,7 @@ Now open the Spark app. connect to the Spark and then select the + Spark Control
 It should find the ESP32 and see it as the Spark Control.    
 
 ## If using BLUEDROID:    
-Ensure ```#define BLUEDROID`` is set    
+Ensure ```#define BLUEDROID``` is set    
 Comment out  ```#define FULL_SERVICES```   
 
 This won't work with IOS.    
