@@ -17,8 +17,9 @@ There are #defines for Heltec, M5Core, M5Core2 - if nothing is defined it will c
 
 You can set #BLUEDROID to force bluedroid BLE stack, or leave it undefined for the NimBLE stack.   
 
-If you are using a pedal like SparkBox, then there is an #define ACTIVE_HIGH to set if your switches are active high.   
-And in the SparkControl.ino file you can change which GPIOs are your switches.  Note this is in the order 1, 3, 2, 4.
+If you are using a pedal like SparkBox, then there is a ```#define ACTIVE_HIGH``` to set if your switches are active high (a switch press connects +ve to the GPIO input). Mine are active low (ground at GPIO input on switch press) so I have this commented out.   
+
+And in the SparkControl.ino file you can change which GPIOs are your switches.  Note this is in the order ```1, 3, 2, 4```.
 ```
 // pins                 1  3  2  4
 uint8_t SCswitchPins[]{33,27,14,26}; 
