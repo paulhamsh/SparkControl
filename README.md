@@ -28,16 +28,16 @@ For IOS - compile without #BLUEDROID. This forces NimBLE.
 For Android - compile either way, both work.    
 
 ## If using NimBLE:    
-Comment out #define BLUEDROID   
-Ensure #define FULL_SERVICES is set    
+Comment out ```#define BLUEDROID ```  
+Ensure ```#define FULL_SERVICES``` is set    
 
 Install LightBlue from PunchThrough. It is a Bluetooth scanning app. Scan for SKC50S-4 v3.0.1 and open the connection (the > sign on the right). Keep LightBlue open.    
 Now open the Spark app. connect to the Spark and then select the + Spark Control button.    
 It should find the ESP32 and see it as the Spark Control.    
 
 ## If using BLUEDROID:    
-Ensuret #define BLUEDROID is set    
-Comment out  #define FULL_SERVICES   
+Ensure ```#define BLUEDROID`` is set    
+Comment out  ```#define FULL_SERVICES```   
 
 This won't work with IOS.    
 This is more simple - just open the Spark app, connect to the Spark and then select the + Spark Control button.    
