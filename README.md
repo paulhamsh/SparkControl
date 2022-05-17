@@ -1,7 +1,7 @@
 # SparkControl
 ## Emulate the Spark Control pedal   
 
-Use the latest version - SparkControlSpoofer4
+Use the latest version - SparkControlSpoofer5
 
 Runs on an ESP32 - tested on Heltec WIFI, M5Core, M5Core 2, generic ESP32.   
 
