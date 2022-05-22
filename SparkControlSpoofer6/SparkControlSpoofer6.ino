@@ -1,6 +1,12 @@
 // USES SPARK BOX TO EMULATE A SPARK CONTROL
 
-#include <esp_gap_ble_api.h>
+
+// Edit NimBLEDevice.cpp
+
+/*
+  //uint8_t                     NimBLEDevice::m_own_addr_type = BLE_OWN_ADDR_PUBLIC;
+  uint8_t                     NimBLEDevice::m_own_addr_type = BLE_OWN_ADDR_RANDOM;
+*/
 
 
 
@@ -13,9 +19,10 @@
       
 //#define ACTIVE_HIGH
 
-#define HELTEC
+//#define HELTEC
 //#define M5CORE
-//#define M5CORE2
+#define M5CORE2
+//#define M5STICK
 
 //#define BLUEDROID
 #define FULL_SERVICES
@@ -31,6 +38,11 @@
 #ifdef M5CORE
 #include <M5Stack.h>
 #endif
+
+#ifdef M5STICK
+#include <M5StickC.h>
+#endif
+
 
 void SparkControlStart();
 void InitialiseGPIO();
@@ -55,8 +67,11 @@ void setup() {
   Heltec.display->drawString(100, 30, "P");
   #endif
   Heltec.display->display();
-#elif defined M5CORE2 || defined M5CORE
+#elif defined M5CORE2 || defined M5CORE || defined M5STICK
   M5.begin();
+#ifdef M5CORE
+  M5.Power.begin();
+#endif
   M5.Lcd.setTextColor(WHITE);
   M5.Lcd.setTextSize(2);
   M5.Lcd.setCursor(0, 0);

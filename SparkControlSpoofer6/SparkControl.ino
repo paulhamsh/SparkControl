@@ -22,12 +22,23 @@
   #define CHAR_INDICATE  NIMBLE_PROPERTY::INDICATE
 #endif
 
-// Had to put these her to make the compiler work but not really sure why
+// Had to put these here to make the compiler work but not really sure why
 
 BLEService* newService(BLEServer *server, const char *service_UUID, int num_chars);
 BLECharacteristic* newCharNoVal(BLEService *pService, const char *char_UUID, uint8_t properties);
 BLECharacteristic* newCharData(BLEService *pService, const char *char_UUID, uint8_t properties, uint8_t *data, int data_len);
 BLECharacteristic* newCharVal(BLEService *pService, const char *char_UUID, uint8_t properties, uint8_t val);
+
+
+void show_addr(uint8_t val[6]) {
+  for (int i = 0; i < 6; i++) {
+    int v = val[5-i];
+    if (v < 16) Serial.print("0");
+    Serial.print(v, HEX); 
+    if (i < 5) Serial.print(":");
+  }
+  Serial.println();
+}
 
 // Server callbacks
 class SCServerCallbacks: public BLEServerCallbacks {
@@ -135,16 +146,7 @@ void SparkControlStart() {
     BLEDevice::init("SKC50S-4 v3.0.1 9E02"); // " 9E02"
     BLEDevice::setPower(ESP_PWR_LVL_P9); /** +9db */
 
-//    uint8_t addr[6] = {0xc0, 0x12, 0x34, 0x56, 0x78, 0x9a};
-//    esp_bd_addr_t addr = {0xff, 0x78, 0x56, 0x34, 0x12, 0xff}; 
-//    esp_ble_gap_config_local_privacy(true);   
-//    esp_bd_addr_t addr = {0x08, 0x3a, 0xf2, 0x71, 0x32, 0xe6}; 
-//    esp_bd_addr_t addr = {0xe6, 0x32, 0x71, 0xf2, 0x3a, 0x08}; 
-//    esp_bd_addr_t addr = {0xdb, 0xab, 0x7f, 0xe0, 0x2f,  0x5c}; 
-//    if (esp_ble_gap_set_rand_addr(addr) != ESP_OK) {  Heltec.display->clear(); Heltec.display->drawString(0, 30, "FAIL RAND"); Heltec.display->display();};
-//    if (esp_ble_gap_config_local_privacy(true) != ESP_OK) {  Heltec.display->clear(); Heltec.display->drawString(0, 30, "FAIL PRIV"); Heltec.display->display();};
-//    if (esp_base_mac_addr_set(addr) != ESP_OK) {  Heltec.display->clear(); Heltec.display->drawString(0, 30, "FAIL MAC"); Heltec.display->display();};
-//    esp_ble_gap_clear_rand_addr();
+
     
     pSCServer = BLEDevice::createServer();
     pSCServer->setCallbacks(new SCServerCallbacks());
@@ -290,16 +292,25 @@ void SparkControlStart() {
 
 #endif
 
-/*    
-    pAdvertising->setMinInterval(32);
-    pAdvertising->setMinPreferred(12);
-    pAdvertising->setMaxPreferred(12);
-*/    
+    ble_addr_t blead;
+    int rc;
 
+    rc = ble_hs_id_gen_rnd(1, &blead);
+    if (rc != 0) Serial.println("Rand failed");
+
+    rc = ble_hs_id_set_rnd(blead.val);
+    if (rc != 0) Serial.println("Addr failed");
+
+    rc = ble_hs_id_copy_addr(BLE_ADDR_PUBLIC, blead.val, NULL);
+    if (rc == 0) show_addr(blead.val);
+    rc = ble_hs_id_copy_addr(BLE_ADDR_RANDOM, blead.val, NULL);
+    if (rc == 0) show_addr(blead.val);
 
     pAdvertising->setScanResponse(true);
     pAdvertising->start();
 }
+
+
 
 
 #ifdef ACTIVE_HIGH
