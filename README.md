@@ -37,11 +37,11 @@ It should find the ESP32 and see it as the Spark Control.
 
 Also, in your Arduino director search for the NimBLE package and edit NimBLEDevice.cpp.   
 
-Change:
-``` uint8_t                     NimBLEDevice::m_own_addr_type = BLE_OWN_ADDR_PUBLIC; ```
-to:
-``` uint8_t                     NimBLEDevice::m_own_addr_type = BLE_OWN_ADDR_RANDOM; ```
-
+Change:   
+``` uint8_t                     NimBLEDevice::m_own_addr_type = BLE_OWN_ADDR_PUBLIC; ```   
+to:   
+``` uint8_t                     NimBLEDevice::m_own_addr_type = BLE_OWN_ADDR_RANDOM; ```   
+   
 ## If using BLUEDROID:    
 Ensure ```#define BLUEDROID``` is set    
 Comment out  ```#define FULL_SERVICES```   
