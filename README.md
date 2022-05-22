@@ -4,18 +4,13 @@
 Use the latest version - SparkControlSpoofer6
 
 Runs on an ESP32 - tested on Heltec WIFI, M5Core, M5Core 2, generic ESP32.   
+The xxample build is running on a Spark Box - see picture below.   
 
-Example build is running on a Spark Box - see picture below.   
+This will appear to the Spark app as the Spark Control pedal.  You can use an existing ESP32 pedal (like Spark Box) or create your own, or use something like an M5Core which has switches on the case (not foot pedal worthy, but good for a demonstration).    
 
-Will appear to the Spark app as the Spark Control pedal.  You can use an existing ESP32 pedal (like Spark Box) or create your own, or use something like an M5Core which has switches on the case (not foot pedal worthy, but good for a demonstration).    
-
-Works with ios and android - although you need some compilation changes and tricks.   
-
-This can be run in 'BLUEDROID' mode or 'NimBLE' mode.   
+Works with ios and android.      
 
 There are #defines for Heltec, M5Core, M5Core2 - if nothing is defined it will compile for a generic ESP32.
-
-You can set #BLUEDROID to force bluedroid BLE stack, or leave it undefined for the NimBLE stack.   
 
 If you are using a pedal like SparkBox, then there is a ```#define ACTIVE_HIGH``` to set if your switches are active high (a switch press connects +ve to the GPIO input). Mine are active low (ground at GPIO input on switch press) so I have this commented out.   
 
@@ -28,28 +23,26 @@ uint8_t SCswitchPins[]{33,27,14,26};
 For IOS - compile without #BLUEDROID. This forces NimBLE.    
 For Android - compile either way, both work.    
 
-## If using NimBLE:    
-Comment out ```#define BLUEDROID ```  
-Ensure ```#define FULL_SERVICES``` is set    
+## To compile       
+Install NimbBLE library (tested with 1.3.8)   
+Edit NimBLEDevice.cpp - probably here:  ```C:\Users\XXXXX\Documents\Arduino\libraries\NimBLE-Arduino\src\NimBLEDevice.cpp``` (replace XXXXX with your user name)   
+Find this line:
+``` uint8_t                     NimBLEDevice::m_own_addr_type = BLE_OWN_ADDR_PUBLIC; ```   
+and repace with   
+```
+#ifdef SPARK_CONTROL
+uint8_t                     NimBLEDevice::m_own_addr_type = BLE_OWN_ADDR_RANDOM;
+#else
+uint8_t                     NimBLEDevice::m_own_addr_type = BLE_OWN_ADDR_PUBLIC;
+#endif
+```   
 
+Set your #define for the board you are using (Heltec WIFI, M5Stack Core, Core2, Stick, or nothing for generic ESP32).   
+Then compile and upload.   
+
+## To use   
 Open the Spark app, connect to the Spark and then select the + Spark Control button.    
 It should find the ESP32 and see it as the Spark Control.    
-
-Also, in your Arduino director search for the NimBLE package and edit NimBLEDevice.cpp.   
-
-Change:   
-``` uint8_t                     NimBLEDevice::m_own_addr_type = BLE_OWN_ADDR_PUBLIC; ```   
-to:   
-``` uint8_t                     NimBLEDevice::m_own_addr_type = BLE_OWN_ADDR_RANDOM; ```   
-   
-## If using BLUEDROID:    
-Ensure ```#define BLUEDROID``` is set    
-Comment out  ```#define FULL_SERVICES```   
-
-This won't work with IOS.    
-Open the Spark app, connect to the Spark and then select the + Spark Control button.    
-It should find the ESP32 and see it as the Spark Control.     
-
 
 
 <p align="center">
