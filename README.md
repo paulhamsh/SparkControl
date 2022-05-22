@@ -1,10 +1,10 @@
 # SparkControl
 ## Emulate the Spark Control pedal   
 
-Use the latest version - SparkControlSpoofer6
+Use the latest version - SparkControlSpoofer7
 
 Runs on an ESP32 - tested on Heltec WIFI, M5Core, M5Core 2, generic ESP32.   
-The xxample build is running on a Spark Box - see picture below.   
+The example build is running on a Spark Box - see picture below.   
 
 This will appear to the Spark app as the Spark Control pedal.  You can use an existing ESP32 pedal (like Spark Box) or create your own, or use something like an M5Core which has switches on the case (not foot pedal worthy, but good for a demonstration).    
 
@@ -20,11 +20,9 @@ And in the SparkControl.ino file you can change which GPIOs are your switches.  
 uint8_t SCswitchPins[]{33,27,14,26}; 
 ```
 
-For IOS - compile without #BLUEDROID. This forces NimBLE.    
-For Android - compile either way, both work.    
-
+  
 ## To compile       
-Install NimbBLE library (tested with 1.3.8)   
+Install NimBLE library (tested with 1.3.8)   
 Edit NimBLEDevice.cpp - probably here:  ```C:\Users\XXXXX\Documents\Arduino\libraries\NimBLE-Arduino\src\NimBLEDevice.cpp``` (replace XXXXX with your user name)   
 Find this line:
 ``` uint8_t                     NimBLEDevice::m_own_addr_type = BLE_OWN_ADDR_PUBLIC; ```   
