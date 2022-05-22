@@ -299,7 +299,7 @@ void SparkControlLoop() {
       int v = digitalRead(SCswitchPins[i]) == logicON ? 1 : 0;
       now_switch |= (v << i);
     }
-    #if defined M5CORE2 || defined M5CORE
+    #if defined M5CORE2 || defined M5CORE || defined M5STICK
       M5.update();
       if (M5.BtnA.isPressed()) now_switch = 1;
       if (M5.BtnB.isPressed()) now_switch = 4;

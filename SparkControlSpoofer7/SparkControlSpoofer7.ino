@@ -22,8 +22,8 @@
 
 //#define HELTEC
 //#define M5CORE
-#define M5CORE2
-//#define M5STICK
+//#define M5CORE2
+#define M5STICK
 
 #ifdef HELTEC
 #include "heltec.h"
