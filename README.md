@@ -32,16 +32,22 @@ For Android - compile either way, both work.
 Comment out ```#define BLUEDROID ```  
 Ensure ```#define FULL_SERVICES``` is set    
 
-Install LightBlue from PunchThrough. It is a Bluetooth scanning app. Scan for SKC50S-4 v3.0.1 and open the connection (the > sign on the right). Keep LightBlue open.    
-Now open the Spark app. connect to the Spark and then select the + Spark Control button.    
+Open the Spark app, connect to the Spark and then select the + Spark Control button.    
 It should find the ESP32 and see it as the Spark Control.    
+
+Also, in your Arduino director search for the NimBLE package and edit NimBLEDevice.cpp.   
+
+Change:
+``` uint8_t                     NimBLEDevice::m_own_addr_type = BLE_OWN_ADDR_PUBLIC; ```
+to:
+``` uint8_t                     NimBLEDevice::m_own_addr_type = BLE_OWN_ADDR_RANDOM; ```
 
 ## If using BLUEDROID:    
 Ensure ```#define BLUEDROID``` is set    
 Comment out  ```#define FULL_SERVICES```   
 
 This won't work with IOS.    
-This is more simple - just open the Spark app, connect to the Spark and then select the + Spark Control button.    
+Open the Spark app, connect to the Spark and then select the + Spark Control button.    
 It should find the ESP32 and see it as the Spark Control.     
 
 
