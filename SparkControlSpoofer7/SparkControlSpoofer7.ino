@@ -11,19 +11,24 @@
   #endif
 */
 
+// Set this if you have switches attached to your GPIOS
+//#define USE_GPIOS
+
+// this triggers the changes in NimBLEDevice.spp
 #define SPARK_CONTROL
 
 // ACTIVE_HIGH define should be set if your pedal sets GPIOs to +ve when switch pressed 
 //    uint8_t SCswitchPins[]{33,27,14,26}; 
 // for your GPIO setup
 // note SCswitchPins is in a strange order - [0][2][1][3]
-      
 //#define ACTIVE_HIGH
 
+// Set your board type- if nothing set then generic ESP32 is assumed
 //#define HELTEC
 //#define M5CORE
 //#define M5CORE2
-#define M5STICK
+//#define M5STICK
+
 
 #ifdef HELTEC
 #include "heltec.h"
@@ -67,7 +72,8 @@ void setup() {
 #else
   Serial.begin(115200);
 #endif
-  
+
+  Serial.begin(115200); 
   spark_box = false;
   InitialiseGPIO();
   if (spark_box) {
