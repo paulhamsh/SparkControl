@@ -42,6 +42,7 @@ class SCServerCallbacks: public BLEServerCallbacks {
 // Characteristic callbacks
 class SCCharacteristicCallbacks: public BLECharacteristicCallbacks {
   void onRead(BLECharacteristic* pCharacteristic){
+    std::string val = pCharacteristic->getValue();
     Serial.print("<<<< ");
     Serial.print(pCharacteristic->getUUID().toString().c_str());
     Serial.print(": onRead(), value: ");
@@ -49,8 +50,8 @@ class SCCharacteristicCallbacks: public BLECharacteristicCallbacks {
     int j, l;
     const char *p;
     byte b;
-    l = pCharacteristic->getValue().length();
-    p = pCharacteristic->getValue().c_str();
+    l = val.length();
+    p = val.c_str();
     for (j = 0; j < l; j++) {
       b = p[j];
       Serial.print(b, HEX);
