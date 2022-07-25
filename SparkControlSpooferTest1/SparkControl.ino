@@ -265,19 +265,27 @@ void SparkControlStart() {
   pAdvertising->start();
 }
 
-
-uint8_t logicON = HIGH;
-uint8_t logicOFF = LOW;
+// Paul's logic - switch will make the value go low - input is pulled up
+  uint8_t logicON = LOW;
+  uint8_t logicOFF = HIGH;
+  
+// Pino's logic - switch will make the value go high - input is pulled down
+//uint8_t logicON = HIGH;
+//uint8_t logicOFF = LOW;
 
 // pins                 1  3  2  4
-uint8_t SCswitchPins[]{33,27,14,26}; 
+uint8_t SCswitchPins[]{33,27,14,26};  // Paul's GPIOs
+//uint8_t SCswitchPins[]{33,32,25,26};  // Pino's GPIOs
 uint8_t last_switch = 0;
 uint8_t now_switch = 0;
 uint8_t sw_dat[1];
 
 void InitialiseGPIO() {
   for (int i = 0; i < 4; i++) {    
-    pinMode(SCswitchPins[i], INPUT_PULLDOWN);
+    // For Paul
+    pinMode(SCswitchPins[i], INPUT_PULLUP);
+    // For Pino
+    //pinMode(SCswitchPins[i], INPUT_PULLDOWN);
   }
 }
 

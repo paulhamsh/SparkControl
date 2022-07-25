@@ -266,8 +266,8 @@ void SparkControlStart() {
 }
 
 
-uint8_t SCswitchPins[]{33,27,14,26};  // Paul's GPIOs
-//uint8_t SCswitchPins[]{33,32,25,26};  // Pino's GPIOs
+//uint8_t SCswitchPins[]{33,27,14,26};  // Paul's GPIOs
+uint8_t SCswitchPins[]{33,32,25,26};  // Pino's GPIOs
 uint8_t last_switch = 0;
 uint8_t now_switch = 0;
 uint8_t sw_dat[1];
