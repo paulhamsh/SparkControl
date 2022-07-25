@@ -282,15 +282,10 @@ void InitialiseGPIO() {
 }
 
 void SparkControlLoop() {
-  Serial.print("33: ”); 
-  Serial.println(digitalRead(33));
-  Serial.print("32: ”); 
-  Serial.println(digitalRead(32));
-  Serial.print("25: ”); 
-  Serial.println(digitalRead(25));
-  Serial.print("26: ”); 
-  Serial.println(digitalRead(26));
-  Serial.println();
+  for (int i = 0; i < 4; i++) {
+    Serial.print(SCswitchPins[i]);
+    Serial.print(": ");
+    Serial.println(digitalRead(SCswitchPins[i]));
+  }
   delay(500);
-
 }    
