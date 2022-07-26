@@ -122,9 +122,12 @@ class CharacteristicCallbacks: public BLECharacteristicCallbacks {
   void onWrite(BLECharacteristic* pCharacteristic) {
         int j, l;
         const char *p;
+        std::string st;
         byte b;
-        l = pCharacteristic->getValue().length();
-        p = pCharacteristic->getValue().c_str();
+    
+        st = pCharacteristic->getValue();
+        l = st.length();
+        p = st.c_str();
         for (j=0; j < l; j++) {
           b = p[j];
           ble_app_in.add(b);
@@ -142,9 +145,12 @@ class MIDICharacteristicCallbacks: public BLECharacteristicCallbacks {
   void onWrite(BLECharacteristic* pCharacteristic) {
         int j, l;
         const char *p;
+        std::string st;
         byte b;
-        l = pCharacteristic->getValue().length();
-        p = pCharacteristic->getValue().c_str();
+    
+        st = pCharacteristic->getValue();
+        l = st.length();
+        p = st.c_str();
         for (j=0; j < l; j++) {
           b = p[j];
           ble_midi_in.add(b);
