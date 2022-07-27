@@ -17,10 +17,10 @@
 #ifdef SSD1306
 //  SSD1306Wire oled(0x3c, 4, 15);    // Default OLED Screen Definitions - ADDRESS, SDA, SCL
 //  SSD1306Wire oled(0x3c, 4, 15);    // Default OLED Screen Definitions - ADDRESS, SDA, SCL
-  SH1106Wire oled(0x3c, 15, 2)
 #endif
 #ifdef SH1106
-  SH1106Wire oled(0x3c, 4, 15);     // or this line if you are using SSH1106
+//  SH1106Wire oled(0x3c, 4, 15);     // or this line if you are using SSH1106
+  SH1106Wire oled(0x3c, 15, 2);
 #endif
 OLEDDisplayUi ui(&oled);            // Create UI instance for the display (slightly advanced frame based GUI)
 

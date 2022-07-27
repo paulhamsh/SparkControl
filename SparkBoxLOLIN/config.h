@@ -32,8 +32,8 @@
 //#define HELTEC_WIFI
 //
 // Choose and uncomment the type of OLED display used: 0.96" SSD1306 or 1.3" SH1106 
-#define SSD1306
-//#define SH1106
+//#define SSD1306
+#define SH1106
 //
 // Uncomment if two-colour OLED screens are used. Offsets some text and alternate tuner
 //#define TWOCOLOUR
@@ -58,7 +58,7 @@
 //const uint8_t switchPins[]{17,5,18,23};                     // Switch gpio numbers (for those who already has built a pedal with these pins)
 //const uint8_t switchPins[]{33,14,27,26};  // PH EDIT
 //const uint8_t switchPins[]{25,26,27,14};                      // Switch gpio numbers (recommended for those who is building a pedal, these pins allow deep sleep)
-const uint8_t switchPins[][]{33,32,25,26};
+const uint8_t switchPins[]{33,32,25,26};
 
 //
 // Startup splash animation
